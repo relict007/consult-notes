@@ -106,7 +106,7 @@
                                                       (concat (propertize "#" 'face 'consult-notes-name)
                                                               (propertize (mapconcat 'identity keywords " ") 'face 'consult-notes-name))
                                                     ""))
-                                          (when consult-notes-denote-dir (format "%18s" (propertize (concat "/" dirs) 'face 'consult-notes-name))))))
+                                          )))
                               cands)))
         ;; Custom preview
         :state  #'consult-notes-denote--state
