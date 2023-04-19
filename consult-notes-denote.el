@@ -105,10 +105,13 @@
     )
   )
 
-(defun consult-notes-clear-cache()
+(defun consult-notes-cache-rebuild()
   (interactive)
   (clrhash denote--ftime-cache)
   (clrhash denote--titles-cache)
+  (setq files (denote--directory-files-sorted))
+  (mapcar (lambda (f) (denote--get-title-value-cached f)) files)
+  (message "consult notes denote cache rebuilt")
   )
 
 ;;;; Source
