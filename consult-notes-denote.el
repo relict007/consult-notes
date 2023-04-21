@@ -49,28 +49,10 @@
   :group 'consult-notes
   :type 'boolean)
 
-(defun denote--directory-files-sorted ()
-  (setq files (denote-directory-files))
-  (sort files (lambda (a b)
-                      (let* (
-                             (attr-a (file-attributes a))
-                             (attr-b (file-attributes b))
-                             (ftime-a (file-attribute-modification-time attr-a))
-                             (ftime-b (file-attribute-modification-time attr-b))
-                             )
-                        (time-less-p ftime-b ftime-a)                      
-                        )
-                      ))
-  )
-
-
 (defcustom consult-notes-denote-files-function (function denote-directory-files)
   "Fuction for listing denote files. If only text files are wanted use `denote-directory-text-only-files' instead."
   :group 'consult-notes
   :type 'function)
-
-
-
 
 (defvar denote--titles-cache (make-hash-table :test 'equal))
 
