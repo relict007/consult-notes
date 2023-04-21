@@ -54,25 +54,6 @@
   :group 'consult-notes
   :type 'function)
 
-(defvar denote--titles-cache (make-hash-table :test 'equal))
-
-(defun denote--get-title-value-cached (file)
-  (let* (
-         (title-from-cache (gethash file denote--titles-cache))
-         (title (if (null title-from-cache)
-                    (let* (
-                           (retrieved-title (or (denote-retrieve-title-value file (denote-filetype-heuristics file)) (denote-retrieve-filename-title file)))
-                           )
-                      (puthash file retrieved-title denote--titles-cache)
-                      retrieved-title
-                      )
-                  title-from-cache
-                  ))
-         )
-    title
-    )
-  )
-
 ;;;; Source
 (defconst consult-notes-denote--source
   (list :name     (propertize "Denote notes" 'face 'consult-notes-sep)
@@ -83,7 +64,7 @@
                     (let* ((max-width 0)
                            (cands (mapcar (lambda (f)
                                             (let* ((id (denote-retrieve-filename-identifier f))
-                                                   (title-1 (denote--get-title-value-cached f))
+                                                   (title-1 (or (denote-retrieve-title-value f (denote-filetype-heuristics f)) (denote-retrieve-filename-title f)))
                                                    (title (if consult-notes-denote-display-id
                                                               (concat id " " title-1)
                                                             title-1))
