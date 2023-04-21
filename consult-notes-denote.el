@@ -107,7 +107,6 @@
 
 (defun consult-notes-cache-rebuild()
   (interactive)
-  (message "consult notes denote cache rebuilding...")
   (clrhash denote--ftime-cache)
   (clrhash denote--titles-cache)
   (setq files (denote--directory-files-sorted))
