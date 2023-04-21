@@ -59,7 +59,7 @@
   (list :name     (propertize "Denote notes" 'face 'consult-notes-sep)
         :narrow   ?d
         :category 'consult-notes-category
-        :annotate #'consult-notes-denote--annotate
+        :annotate #'consult-notes-denote--annotate-nothing
         :items    (lambda ()
                     (let* ((max-width 0)
                            (cands (mapcar (lambda (f)
@@ -82,7 +82,7 @@
                                   (concat c
                                           ;; align keywords
                                           (propertize " " 'display `(space :align-to (+ left ,(+ 2 max-width))))
-                                          (format "%18s"
+                                          (format "%54s"
                                                   (if keywords
                                                       (propertize (mapconcat #'(lambda (k) (concat "#" k)) keywords " ") 'face 'consult-notes-name)
                                                     ""))
@@ -147,6 +147,10 @@ Input \"foo\", then create \"id-foo\", file type is determined by
     (put-text-property 0 (length fsize) 'face 'consult-notes-size fsize)
     (put-text-property 0 (length ftime) 'face 'consult-notes-time ftime)
     (format "%8s  %8s" fsize ftime)))
+
+(defun consult-notes-denote--annotate-nothing (cand)
+  ""
+  )
 
 (provide 'consult-notes-denote)
 ;;; consult-notes-denote.el ends here
