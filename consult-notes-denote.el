@@ -84,8 +84,7 @@
                                           (propertize " " 'display `(space :align-to (+ left ,(+ 2 max-width))))
                                           (format "%18s"
                                                   (if keywords
-                                                      (concat (propertize "#" 'face 'consult-notes-name)
-                                                              (propertize (mapconcat 'identity keywords " ") 'face 'consult-notes-name))
+                                                      (propertize (mapconcat #'(lambda (k) (concat "#" k)) keywords " ") 'face 'consult-notes-name)
                                                     ""))
                                           )))
                               cands)))
