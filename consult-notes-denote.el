@@ -79,13 +79,12 @@
                                 (let* ((keywords (get-text-property 0 'denote-keywords c))
                                        (path (get-text-property 0 'denote-path c))
                                        (dirs (directory-file-name (file-relative-name (file-name-directory path) denote-directory))))
-                                  (concat c
-                                          ;; align keywords
-                                          (propertize " " 'display `(space :align-to (+ left ,(+ 2 max-width))))
-                                          (format "%54s"
+                                  (concat c " ("
+                                          (format "%0s"
                                                   (if keywords
                                                       (propertize (mapconcat #'(lambda (k) (concat "#" k)) keywords " ") 'face 'consult-notes-name)
-                                                    ""))
+                                                    "---"))
+                                          ")"
                                           )))
                               cands)))
         ;; Custom preview
